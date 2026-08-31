@@ -1,0 +1,2 @@
+101|Green Valley Apartment|Apartment|Hyderabad|6500000.0|3|2|Spacious 3 BHK apartment|Approved
+102|Dream Apartment|Apartment|Hyderabad|55000000.0|5|4|Spacious Apartment with 5 BHK|Approved
