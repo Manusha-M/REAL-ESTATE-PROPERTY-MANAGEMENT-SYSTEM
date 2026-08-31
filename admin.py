@@ -1,73 +1,43 @@
-from agent.agent import Agent
+from admin.admin import AdminModule
+from admin.property_management import PropertyManagement
 
 
-def agent_login():
-    print("\n========== AGENT LOGIN ==========")
-
-    email = input("Email: ").strip()
-    password = input("Password: ").strip()
-
-    users = Agent.load_users()
-
-    for user in users:
-        if (
-            user.get("email") == email
-            and user.get("password") == password
-            and user.get("role") == "agent"
-        ):
-            agent = Agent.from_dict(user)
-            print(f"\nWelcome, {agent.name} (Agent)!")
-            agent_menu(agent)
-            return
-
-    print("\nInvalid agent email or password.")
-
-
-def agent_menu(agent):
+def admin_menu():
+    admin = AdminModule()
     while True:
-        print("\n========== AGENT MENU ==========")
-        print("1. Add Property")
-        print("2. View My Properties")
-        print("3. Update Property")
-        print("4. Delete Property")
-        print("5. Update Property Status")
-        print("6. View Booking Requests")
-        print("7. Logout")
-
+        print("\n========== ADMIN MENU ==========")
+        print("1. Add Agent")
+        print("2. View Agents")
+        print("3. View Customers")
+        print("4. Add Property")
+        print("5. View All Properties")
+        print("6. Approve Property")
+        print("7. Reject/Delete Property")
+        print("8. View All Enquiries")
+        print("9. View Enquiries By Property")
+        print("10. View Booking Requests")
+        print("11. Approve Booking")
+        print("12. Reject Booking")
+        print("13. Logout")
         choice = input("Enter choice: ").strip()
-
         try:
-            if choice == "1":
-                agent.add_property_interactive()
+            if choice == '1': admin.add_agent(input('Agent name: ').strip(), input('Agent email: ').strip(), input('Agent password: ').strip())
+            elif choice == '2': admin.view_agents()
+            elif choice == '3': admin.view_customers()
+            elif choice == '4': admin.add_property_interactive()
+            elif choice == '5': admin.view_all_properties()
+            elif choice == '6': admin.approve_property(int(input('Property ID: ')))
+            elif choice == '7': admin.reject_delete_property(int(input('Property ID: ')))
+            elif choice == '8': admin.view_all_enquiries()
+            elif choice == '9': admin.view_enquiries_by_property(int(input('Property ID: ')))
+            elif choice == '10': admin.view_bookings_detailed()
+            elif choice == '11': admin.update_booking(int(input('Booking ID: ')), 'Approved')
+            elif choice == '12': admin.update_booking(int(input('Booking ID: ')), 'Rejected')
+            elif choice == '13': break
+            else: print('Invalid choice.')
+        except ValueError: print('Please enter a valid number.')
+        except Exception as error: print('Error:', error)
 
-            elif choice == "2":
-                agent.view_my_properties()
-
-            elif choice == "3":
-                property_id = input("Enter Property ID: ").strip()
-                agent.update_my_property(property_id)
-
-            elif choice == "4":
-                property_id = input("Enter Property ID: ").strip()
-                agent.delete_my_property(property_id)
-
-            elif choice == "5":
-                property_id = input("Enter Property ID: ").strip()
-                agent.update_my_property_status(property_id)
-
-            elif choice == "6":
-                agent.view_bookings()
-
-            elif choice == "7":
-                print("Agent logged out.")
-                break
-
-            else:
-                print("Invalid choice. Please enter 1-7.")
-
-        except Exception as e:
-            print(f"Error: {e}")
-
-
-if __name__ == "__main__":
-    agent_login()
+if __name__ == '__main__':
+    AdminModule().create_default_accounts()
+    admin_menu()
