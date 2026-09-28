@@ -1,6 +1,5 @@
-============
-             REAL ESTATE PROPERTY MANAGEMENT SYSTEM
-============
+====== REAL ESTATE PROPERTY MANAGEMENT SYSTEM
+======
 
 A simple console-based Real Estate Property Management System
 developed using Python, MySQL, OOP concepts and file handling.
