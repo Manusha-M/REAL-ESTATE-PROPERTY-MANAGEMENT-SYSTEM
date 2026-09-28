@@ -223,7 +223,7 @@ python main.py
 
 ---
 
-## 📊 SQL Practice
+##  SQL Practice
 
 After running `connection.py`, the database can be opened in MySQL Workbench.
 
