@@ -1,266 +1,356 @@
-REAL ESTATE PROPERTY MANAGEMENT SYSTEM
-= 
+# Real Estate Property Management System
 
-A simple console-based Real Estate Property Management System
-developed using Python, MySQL, OOP concepts and file handling.
+A Python-based console application for managing real estate properties, agents, customers, enquiries, and booking requests. The project uses Object-Oriented Programming (OOP), file handling, exception handling, and a MySQL database for database practice and storage.
 
-------------------------------------------------------------
-PROJECT FEATURES
-------------------------------------------------------------
+---
 
-The system supports three main users:
+##  Project Overview
 
-1. ADMIN
-   - Manage agents
-   - Add and manage properties
-   - Approve or reject properties
-   - View enquiries
-   - View booking requests
+The Real Estate Property Management System provides separate access for **Admin, Agent, and Customer** users.
 
-2. AGENT
-   - Add properties
-   - View own properties
-   - Update properties
-   - View enquiries
-   - Manage booking requests
+### Admin
+- Add and manage agents
+- Add properties
+- Approve or reject properties
+- View enquiries
+- View booking requests
 
-3. CUSTOMER
-   - Register and login
-   - Search properties
-   - View approved properties
-   - Send enquiries
-   - Request bookings
-   - Save favourite properties
-   - Request property visits
+### Agent
+- Add properties
+- View own properties
+- Update property details
+- View enquiries
+- View booking requests
 
-------------------------------------------------------------
-PROJECT FILES
-------------------------------------------------------------
+### Customer
+- Register and login
+- Search properties
+- View approved properties
+- Send enquiries
+- Request property bookings
+- Save favourite properties
+- Request property visits
 
-main.py
-    Starts the application and displays the main menu.
+---
 
-admin.py
-    Contains admin related operations.
+##  Features
 
-agent.py
-    Contains agent related operations.
+- User registration and login
+- Role-based menus
+- Property management
+- Property approval
+- Customer enquiries
+- Booking requests
+- File handling
+- Exception handling
+- Object-Oriented Programming
+- MySQL database connection and table creation
+- SQL practice using real project tables
 
-customer.py
-    Contains customer related operations.
+---
 
-property.py
-    Handles property related operations.
+##  Tech Stack
 
-enquiry.py
-    Handles enquiry related operations.
+| Category | Technology |
+| --- | --- |
+| Language | Python 3 |
+| Programming | Object-Oriented Programming (OOP) |
+| Database | MySQL |
+| Python-MySQL Connection | mysql-connector-python |
+| Storage | Text files and MySQL |
+| Interface | Console-based |
 
-user.py
-    Handles user related operations.
+---
 
-db.py
-    Contains database related functions used by the project.
+##  Project Structure
 
-connection.py
-    Connects Python with MySQL, creates the database and
-    tables, and inserts sample records.
+```text
+REAL-ESTATE-PROPERTY-MANAGEMENT-SYSTEM/
+│
+├── main.py
+├── admin.py
+├── agent.py
+├── customer.py
+├── property.py
+├── enquiry.py
+├── user.py
+├── db.py
+├── connection.py
+│
+├── users.txt
+├── properties.txt
+├── enquiries.txt
+├── bookings.txt
+│
+├── requirements.txt
+└── README.txt
+```
 
-users.txt
-    Stores user information used by the file-handling part
-    of the project.
+### File Description
 
-properties.txt
-    Stores property information.
+- `main.py` - Main menu and application flow
+- `admin.py` - Admin operations
+- `agent.py` - Agent operations
+- `customer.py` - Customer operations
+- `property.py` - Property related operations
+- `enquiry.py` - Enquiry related operations
+- `user.py` - User related operations
+- `db.py` - Database related functions
+- `connection.py` - MySQL connection, database creation, table creation, and sample data
+- `users.txt` - User data used by the file-handling part
+- `properties.txt` - Property data
+- `enquiries.txt` - Enquiry data
+- `bookings.txt` - Booking data
+- `requirements.txt` - Required Python packages
 
-enquiries.txt
-    Stores enquiry information.
+---
 
-bookings.txt
-    Stores booking information.
+##  MySQL Database
 
-requirements.txt
-    Contains the Python packages required for the project.
+The MySQL database created by `connection.py` is:
 
-------------------------------------------------------------
-TECHNOLOGIES USED
-------------------------------------------------------------
+```text
+real_estate
+```
 
-Python
-MySQL
-MySQL Connector
-OOP
-File Handling
-Exception Handling
-SQL
+The following tables are created:
 
-------------------------------------------------------------
-MYSQL DATABASE
-------------------------------------------------------------
+```text
+users
+properties
+enquiries
+bookings
+```
 
-Database name:
+### Table Relationships
 
-    real_estate
+```text
+users
+  |
+  ├── properties
+  |
+  ├── enquiries
+  |
+  └── bookings
+```
 
-Tables:
+The `properties`, `enquiries`, and `bookings` tables use foreign keys to connect related records.
 
-    users
-    properties
-    enquiries
-    bookings
+---
 
-The connection.py file creates the database and tables
-automatically if they do not already exist.
+##  Setup & Run
 
-------------------------------------------------------------
-SETUP
-------------------------------------------------------------
+### Prerequisites
 
-1. Install Python 3.
+Make sure the following are installed:
 
-2. Install MySQL 8.
+- Python 3.x
+- MySQL Server
+- Git Bash
 
-3. Open Git Bash inside the project folder.
+Check Python:
 
-4. Create a virtual environment:
+```bash
+python --version
+```
 
-    python -m venv venv
+Check MySQL:
 
-5. Activate the virtual environment:
+```bash
+mysql --version
+```
 
-    source venv/Scripts/activate
+### 1. Open the project in Git Bash
 
-6. Install the required packages:
+```bash
+cd ~/Downloads/REAL-ESTATE-PROPERTY-MANAGEMENT-SYSTEM-main
+```
 
-    pip install -r requirements.txt
+### 2. Create a virtual environment
 
-------------------------------------------------------------
-MYSQL PASSWORD
-------------------------------------------------------------
+```bash
+python -m venv venv
+```
 
-Open connection.py and check the MySQL password.
+### 3. Activate the virtual environment
 
-The current connection is:
+```bash
+source venv/Scripts/activate
+```
 
-    host="localhost"
-    user="root"
-    password="ROOT"
+### 4. Install the required packages
 
-If your MySQL root password is different, change only the
-password value in connection.py.
+```bash
+pip install -r requirements.txt
+```
 
-------------------------------------------------------------
-CREATE DATABASE AND TABLES
-------------------------------------------------------------
+### 5. Configure MySQL
+
+Open `connection.py` and update the MySQL password if required:
+
+```python
+db_config = SQLC.connect(
+    host="localhost",
+    user="root",
+    password="your_mysql_password"
+)
+```
+
+### 6. Create the database and tables
 
 Run:
 
-    python connection.py
+```bash
+python connection.py
+```
 
-The script creates:
+The script automatically:
 
-    real_estate
+- Connects to MySQL
+- Creates the `real_estate` database
+- Creates the required tables
+- Adds sample users
+- Adds sample agents and customers
+- Adds sample properties
+- Adds a sample enquiry
+- Adds a sample booking
 
-and these tables:
+### 7. Run the application
 
-    users
-    properties
-    enquiries
-    bookings
+```bash
+python main.py
+```
 
-It also inserts sample users, agents, customers and
-properties.
+---
 
-The insert section is written so that running the file
-again does not create duplicate sample records.
+## 📊 SQL Practice
 
-------------------------------------------------------------
-CHECK DATABASE IN MYSQL
-------------------------------------------------------------
+After running `connection.py`, the database can be opened in MySQL Workbench.
 
-Open MySQL:
+```sql
+USE real_estate;
+```
 
-    mysql -u root -p
+You can practice:
 
-Then run:
+- SELECT
+- WHERE
+- AND / OR
+- LIKE
+- BETWEEN
+- IN
+- ORDER BY
+- GROUP BY
+- HAVING
+- COUNT
+- SUM
+- AVG
+- MIN
+- MAX
+- INNER JOIN
+- LEFT JOIN
+- RIGHT JOIN
+- Subqueries
 
-    SHOW DATABASES;
+### Example INNER JOIN
 
-    USE real_estate;
+```sql
+SELECT p.title, p.location, u.name AS agent
+FROM properties p
+INNER JOIN users u
+ON p.agent_id = u.user_id;
+```
 
-    SHOW TABLES;
+### Example LEFT JOIN
 
-To check the data:
+```sql
+SELECT u.name, p.title
+FROM users u
+LEFT JOIN properties p
+ON u.user_id = p.agent_id;
+```
 
-    SELECT * FROM users;
+### Example GROUP BY
 
-    SELECT * FROM properties;
+```sql
+SELECT agent_id, COUNT(*) AS total_properties
+FROM properties
+GROUP BY agent_id;
+```
 
-    SELECT * FROM enquiries;
+---
 
-    SELECT * FROM bookings;
+##  OOP Concepts Used
 
-------------------------------------------------------------
-SQL PRACTICE
-------------------------------------------------------------
+The project demonstrates:
 
-After creating the database, the tables can be used for
-SQL practice in MySQL Workbench.
+- Classes and objects
+- Constructors
+- Inheritance
+- Encapsulation
+- Methods
+- Exception handling
+- File handling
+- Modular programming
 
-Examples of topics that can be practiced:
+---
 
-    SELECT
-    WHERE
-    AND / OR
-    LIKE
-    BETWEEN
-    IN
-    ORDER BY
-    GROUP BY
-    HAVING
-    COUNT
-    SUM
-    AVG
-    MIN
-    MAX
-    INNER JOIN
-    LEFT JOIN
-    RIGHT JOIN
-    Subqueries
+##  Notes
 
-Example INNER JOIN:
+- The project is console-based.
+- The text files are retained because they are part of the original file-handling implementation.
+- MySQL is used for database setup and SQL practice through `connection.py`.
+- Keep your local MySQL password private when sharing the project.
+- Do not upload real database passwords to a public repository.
 
-    SELECT p.title, p.location, u.name AS agent
-    FROM properties p
-    INNER JOIN users u
-    ON p.agent_id = u.user_id;
+---
 
-Example LEFT JOIN:
+##  Team Members & Contributions
 
-    SELECT u.name, p.title
-    FROM users u
-    LEFT JOIN properties p
-    ON u.user_id = p.agent_id;
+| Name | Role / Contribution |
+| --- | --- |
+| **Sravani** | Admin module, admin login, agent management, property approval/rejection, enquiry and booking management |
+| **Manusha** | Agent module, property management, agent operations, MySQL database connection and table setup |
+| **Rithika** | Customer module, customer registration/login, property search, enquiries, bookings, favourites and visit requests |
 
-------------------------------------------------------------
-RUN THE APPLICATION
-------------------------------------------------------------
+### Team Project
 
-After the database setup is complete, run:
+This project was developed as a **group project**, with each member working on different modules and integrating the modules into the complete Real Estate Property Management System.
 
-    python main.py
+---
 
-------------------------------------------------------------
-NOTES
-------------------------------------------------------------
+##  Project Flow
 
-The TXT files are kept because the original project uses
-file handling for storing application data.
+```text
+Main Menu
+    |
+    ├── Admin Login
+    │      ├── Manage Agents
+    │      ├── Manage Properties
+    │      ├── Enquiries
+    │      └── Booking Requests
+    │
+    ├── Agent Login
+    │      ├── Add Property
+    │      ├── View Properties
+    │      ├── Update Property
+    │      ├── Enquiries
+    │      └── Booking Requests
+    │
+    └── Customer
+           ├── Register / Login
+           ├── Search Properties
+           ├── View Approved Properties
+           ├── Send Enquiry
+           ├── Booking Request
+           ├── Save Favourite
+           └── Request Visit
+```
 
-The MySQL database setup is provided through connection.py
-for database and SQL practice.
+---
 
-Do not commit real passwords to a public GitHub repository.
-If the project is uploaded publicly, replace the password
-with your own local configuration before sharing it.
+##  Team
 
-============================================================
+**Sravani | Manusha | Rithika**
+
+Real Estate Property Management System
